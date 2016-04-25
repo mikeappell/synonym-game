@@ -1,0 +1,4 @@
+require_relative '../config/environment.rb'
+
+current_session = CLI.new
+current_session.start
