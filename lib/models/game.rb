@@ -21,6 +21,7 @@ class Game
     @current_thesaurus = @scraper.new_thesaurus(@current_word)
     @all_synonyms = @current_thesaurus.keys
     @current_score = 0
+    @guesses = []
     @current_word
   end
 
@@ -51,7 +52,7 @@ class Game
 
     @current_thesaurus.each do |word, value|
       if @guesses.include?(word) 
-        all_words_guessed << "#{word.bluebold} : #{value}".ljust(40)
+        all_words_guessed << "#{word.bluebold} : #{value}".ljust(43)
       else 
         all_words << "#{word} : #{value}".ljust(30)
       end
@@ -64,10 +65,9 @@ class Game
         guesses_wrong << word.redbold.ljust(30)
       end
     end
-
     [guesses_correct, guesses_wrong, all_words, all_words_guessed]
   end
-  
+
   def test_scraper
     @scraper.test_scraper
   end

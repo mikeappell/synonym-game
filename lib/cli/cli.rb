@@ -40,7 +40,7 @@ class CLI
     puts "Enter any and all synonyms you can think of. Type #{"q".redbold} if you want to exit early."
     puts "Go!\n"
 
-    Thread.new {timer}
+    @timer_thread = Thread.new {timer}
     @guess_thread = Thread.new {guesses_loop}
     @guess_thread.join
 
@@ -66,7 +66,6 @@ class CLI
     countdown = 30
     start = Time.now
     countdown.times do 
-      # update_timer(countdown, start)
       sleep(1)
     end
     @guess_thread.exit
@@ -75,7 +74,10 @@ class CLI
   def guesses_loop
     loop do
       guess = gets.chomp
-      break if guess == "q"
+      if guess == "q"
+        @timer_thread.exit
+        break
+      end
       value = @game.guess_word(guess)
       if value == "Already guessed"
         puts "Already guessed that one, can't fool me!"
@@ -92,7 +94,7 @@ class CLI
 
       # Formats the array listing, spacing it into two columns.
 
-      unless (index + 1) % 6 == 0
+      unless (index + 1) % 4 == 0
         print "#{word.to_s}"
       else puts "#{word}"
       end
