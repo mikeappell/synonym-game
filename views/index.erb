@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Synonym Game</title>
+</head>
+
+<body>
+  <div id="game-title" class="center">
+    <h1>Welcome to the Synonym Game!</h1>
+    <input type='submit' id="start-game" value="Start Game">
+    <input type='submit' id="end-game" value="End Game" disabled='true'>
+  </div>
+  
+  <br><br><br>
+
+  <span id="current-score" class="left">Current Score: 0</span>
+  <span id="total-score" class="right">Total Score: 0</span>
+  <span id="timer">Time Left: </span>
+
+  <br><br><br>
+
+  <div id="selected-word"><br>
+  </div>
+
+  <br>
+  
+  <label for="word-input">Enter your guess</label>
+  <input id="word-input" placeholder="Guesses go here">
+  <input type='submit' id='make-guess' value="Guess!">
+  
+  <br><br>
+  
+  <div id="guess-result"><br></div>
+
+  <h3>Correct Guesses</h3>
+  <table id="correct-guesses"><tr></tr></table>
+  <h3>Incorrect Guesses</h3>
+  <table id="incorrect-guesses"><tr></tr></table>
+  <h3>All Synonyms</h3>
+  <table id="all-synonyms"><tr></tr></table>
+
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+
+</body>
+</html>

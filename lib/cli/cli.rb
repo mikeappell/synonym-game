@@ -46,13 +46,13 @@ class CLI
 
     @game.end_game
     puts "\n\nGame complete! You scored #{@game.current_score.to_s.green}. Your total score for this session is #{@game.total_score.to_s.green}.\n"
-    guesses_correct, guesses_wrong, all_words, all_words_guessed = @game.hits_and_misses
+    hits_and_misses = @game.hits_and_misses
     puts "Your guesses were:\n"
-    present_word_array(guesses_correct)
-    present_word_array(guesses_wrong)
+    present_word_array(hits_and_misses[:guesses_correct])
+    present_word_array(hits_and_misses[:guesses_wrong])
     puts "\nAll possible synonyms:\n"
-    present_word_array(all_words)
-    present_word_array(all_words_guessed)
+    present_word_array(hits_and_misses[:all_words])
+    present_word_array(hits_and_misses[:all_words_guessed])
 
     puts "\n\n"
     user_options
@@ -81,6 +81,8 @@ class CLI
       value = @game.guess_word(guess)
       if value == "Already guessed"
         puts "Already guessed that one, can't fool me!"
+      elsif value == "Original word"
+        puts "Well, I mean, yeah..."
       elsif value
         puts "Correct! That word was worth #{value} points. Your score is #{@game.current_score}."
       else 

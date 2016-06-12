@@ -25,15 +25,17 @@ class Game
     @current_word
   end
 
-  def end_game
+  def end_game(cli = true)
     @total_score += @current_score
-    hits_and_misses
+    hits_and_misses(cli)
   end
 
   def guess_word(word)
     if @guesses.include?(word)
       "Already guessed"
-    elsif @all_synonyms.include?(word)
+    elsif word == @current_word
+      "Original word"
+    elsif  @all_synonyms.include?(word)
       @current_score += @current_thesaurus[word]
       @guesses << word
       @current_thesaurus[word]
@@ -47,25 +49,27 @@ class Game
 
   end
 
-  def hits_and_misses
+  def hits_and_misses(cli = true)
     guesses_correct, guesses_wrong, all_words, all_words_guessed = [], [], [], []
 
     @current_thesaurus.each do |word, value|
       if @guesses.include?(word) 
-        all_words_guessed << "#{word.bluebold} : #{value}".ljust(43)
+        all_words_guessed << (cli ? "#{word.bluebold} : #{value}".ljust(43) : "#{word} : #{value}")
       else 
-        all_words << "#{word} : #{value}".ljust(30)
+        all_words << (cli ? "#{word} : #{value}".ljust(30) : "#{word} : #{value}")
       end
     end
 
     @guesses.each do |word|
       if @all_synonyms.include?(word)
-        guesses_correct << word.bluebold.ljust(30)
+        guesses_correct << (cli ? word.bluebold.ljust(30) : word)
       else
-        guesses_wrong << word.redbold.ljust(30)
+        guesses_wrong << (cli ? word.redbold.ljust(30) : word)
       end
     end
-    [guesses_correct, guesses_wrong, all_words, all_words_guessed]
+    
+    { guesses_correct: guesses_correct, guesses_wrong: guesses_wrong,
+      all_words: all_words, all_words_guessed: all_words_guessed }
   end
 
   def test_scraper
