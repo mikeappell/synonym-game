@@ -18,11 +18,11 @@ class Game
 
   def start_game
     @current_word = @random_word.get_new_word
-    @current_thesaurus = @scraper.new_thesaurus(@current_word)
+    @current_thesaurus, word_definition = @scraper.new_thesaurus(@current_word)
     @all_synonyms = @current_thesaurus.keys
     @current_score = 0
     @guesses = []
-    @current_word
+    "#{@current_word} - #{word_definition}"
   end
 
   def end_game(cli = true)
@@ -67,7 +67,7 @@ class Game
         guesses_wrong << (cli ? word.redbold.ljust(30) : word)
       end
     end
-    
+
     { guesses_correct: guesses_correct, guesses_wrong: guesses_wrong,
       all_words: all_words, all_words_guessed: all_words_guessed }
   end

@@ -7,7 +7,8 @@ class ThesaurusScraper
   def new_thesaurus(current_word)
     # Generate new thesaurus word/pairs unit.
     words_values_array = get_word_value_array(current_word)
-    parse_words_and_values(words_values_array)
+    words_values = parse_words_and_values(words_values_array[0])
+    [words_values, words_values_array[1]]
   end
 
   # def query(word)
@@ -17,6 +18,9 @@ class ThesaurusScraper
   def get_word_value_array(word)
     html = RestClient.get("http://www.thesaurus.com/browse/#{word}")
     word_string = Nokogiri::HTML(html).css("div.relevancy-list ul li a").to_a
+    part_of_speech = Nokogiri::HTML(html).css("div.mask ul li a em")[0].text
+    word_definition = Nokogiri::HTML(html).css("div.mask ul li a strong")[0].text
+    [word_string, "(#{part_of_speech}) #{word_definition}"]
   end
 
   def parse_words_and_values(wv_array)

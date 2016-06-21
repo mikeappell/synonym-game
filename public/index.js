@@ -14,7 +14,10 @@ $(function() {
 
 function startGame() {
   $('input#start-game').prop('disabled', true);
+  $('input#word-input').prop('disabled', false);
+  $('input#make-guess').prop('disabled', false);
   $('input#end-game').prop('disabled', false);
+  $('div#guess-result').html('<br>');
   [$('table#correct-guesses'), $('table#incorrect-guesses'), $('table#all-synonyms')].forEach(function(table) {
     table.html('<tbody><tr></tr></tbody>');
   })
@@ -29,16 +32,18 @@ function startGame() {
 
 function endGame() {
   $('input#start-game').prop('disabled', false);
+  $('input#word-input').prop('disabled', true);
+  $('input#make-guess').prop('disabled', true);
   $('input#end-game').prop('disabled', true);
   window.clearInterval(gameTimer);
-  $('span#timer').html('Time Left: 0');
+  $('span#timer').html(0);
   $.ajax({
     type: 'post',
     url: '/endGame.json',
     dataType: 'json',
     success: showHitsAndMisses
   })
-  $('span#current-score').html("Current Score: 0");
+  $('span#current-score').html("0");
 }
 
 function makeGuess() {
@@ -79,17 +84,16 @@ function parseGuessReturn(response) {
 }
 
 function updateScores(value) {
-  let currentScore = $('span#current-score').html().match(/: (\d+)$/)[1];
+  let currentScore = $('span#current-score').html();
   currentScore = parseInt(currentScore) + value;
-  let totalScore = $('span#total-score').html().match(/: (\d+)$/)[1];
+  let totalScore = $('span#total-score').html();
   totalScore = parseInt(totalScore) + value;
-  $('span#current-score').html("Current Score: " + currentScore);
-  $('span#total-score').html("Total Score: " + totalScore);
+  $('span#current-score').html(currentScore);
+  $('span#total-score').html(totalScore);
   return totalScore;
 }
 
 function showHitsAndMisses(response) {
-  debugger;
   // $('div#correct-guesses').html(response.hits_and_misses.guesses_correct);
   // $('div#incorrect-guesses').html(response.hits_and_misses.guesses_incorrect);
   // $('div#synonym-list').html(response.hits_and_misses.all_words + response.hits_and_misses.all_words_guessed);
@@ -103,15 +107,14 @@ function showHitsAndMisses(response) {
 }
 
 function startGameTimer() {
-  console.log("in timer")
   let timeInGame = 60;
-  $('span#timer').html(`Time Left: ${timeInGame}`);
+  $('span#timer').html(timeInGame);
   gameTimer = setInterval(myTimer, 1000);
 
   function myTimer() {
     console.log("current time left: " + timeInGame)
     timeInGame--
-    $('span#timer').html(`Time Left: ${timeInGame}`);
+    $('span#timer').html(timeInGame);
     if (timeInGame === 0) {
       endGame();
       window.clearInterval(gameTimer);
@@ -120,12 +123,11 @@ function startGameTimer() {
 }
 
 function updateGuessTable(tableName, word) {
-  debugger;
   var table = $('table#' + tableName);
   var lastRow = table.children('tbody').children('tr:last');
   if (lastRow.children('td').length <= 5) {
-    lastRow.append(`<td>${word}</td>`);
+    lastRow.append(`<td class="col-md-2 td-left">${word}</td>`);
   } else {
-    table.append(`<tr><td>${word}</td></tr>`)
+    table.append(`<tr><td class="col-md-2 td-left">${word}</td></tr>`)
   }
 }

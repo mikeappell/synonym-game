@@ -1,0 +1,18 @@
+table.table tbody tr td.td-left {
+  float: left;
+}
+div.guess-table {
+  min-height: 100px;
+}
+span.gray {
+  background-color: gray;
+}
+.left {
+  padding-left: 0px;  
+}
+div#selected-word {
+  min-height: 30px;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
