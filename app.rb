@@ -13,6 +13,7 @@ class App < Sinatra::Base
 
   post '/startGame.json', provides: :json do
     settings.game = Game.new
+    UpdateCounts.update_play_count
     content_type :json
     { current_word: settings.game.start_game }.to_json
   end
@@ -23,6 +24,11 @@ class App < Sinatra::Base
     { hits_and_misses: hits_and_misses }.to_json
   end
 
+  post '/newView.json' do
+    UpdateCounts.update_view_count
+    status 200
+    body ''
+  end
 
   post '/makeGuess.json', provides: :json do
     guessed_word = Rack::Utils.escape_html(params[:guess])

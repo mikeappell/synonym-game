@@ -1,9 +1,9 @@
 var gameTimer = null;
 
 $(function() {
+  updatePageLoadCounter();
   $('input#start-game').on('click', startGame);
   $('input#end-game').on('click', endGame);
-
   $('input#make-guess').on('click', makeGuess);
   $('input#word-input').keyup(function(event){
     if(event.keyCode == 13) {
@@ -130,4 +130,14 @@ function updateGuessTable(tableName, word) {
   } else {
     table.append(`<tr><td class="col-md-2 td-left">${word}</td></tr>`)
   }
+}
+
+function updatePageLoadCounter() {
+  $.ajax({
+    type: 'post',
+    url: '/newView.json',
+    dataType: 'json'
+    // data: {"guess": guessedWord},
+    // success: parseGuessReturn
+  })
 }
