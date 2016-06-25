@@ -9,7 +9,8 @@ gem 'sinatra'
 gem 'rake'
 gem 'rack'
 gem 'thin'
-gem 'shotgun'
+
+gem 'rails_12factor', group: :production
 
 group :test, :development do 
   gem 'rspec'

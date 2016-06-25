@@ -25,6 +25,11 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     rake (11.2.2)
     require_all (1.3.3)
     rest-client (1.8.0)
@@ -44,8 +49,6 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    shotgun (0.9.1)
-      rack (>= 1.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -71,11 +74,11 @@ DEPENDENCIES
   nokogiri
   pry
   rack
+  rails_12factor
   rake
   require_all
   rest-client
   rspec
-  shotgun
   sinatra
   term-ansicolor
   thin
