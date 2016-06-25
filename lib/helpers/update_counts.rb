@@ -1,5 +1,3 @@
-require 'pry'
-
 class UpdateCounts
   def self.update_play_count
     file = File.open("db/counts.txt", 'r+')
