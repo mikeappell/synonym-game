@@ -1,7 +1,7 @@
 var gameTimer = null;
 
 $(function() {
-  updatePageLoadCounter();
+  // updatePageLoadCounter();
   $('input#start-game').on('click', startGame);
   $('input#end-game').on('click', endGame);
   $('input#make-guess').on('click', makeGuess);
