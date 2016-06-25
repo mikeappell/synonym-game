@@ -15,5 +15,3 @@ class UpdateCounts
     File.open("db/counts.txt", 'w') { |f| f.write(content) }
   end
 end
-
-#TemporaryhorSeAnnexFlusterer

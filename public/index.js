@@ -1,7 +1,7 @@
 var gameTimer = null;
 
 $(function() {
-  // updatePageLoadCounter();
+  updatePageLoadCounter();
   $('input#start-game').on('click', startGame);
   $('input#end-game').on('click', endGame);
   $('input#make-guess').on('click', makeGuess);
@@ -137,7 +137,5 @@ function updatePageLoadCounter() {
     type: 'post',
     url: '/newView.json',
     dataType: 'json'
-    // data: {"guess": guessedWord},
-    // success: parseGuessReturn
   })
 }

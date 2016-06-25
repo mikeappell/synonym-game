@@ -13,7 +13,7 @@ class App < Sinatra::Base
 
   post '/startGame.json', provides: :json do
     settings.game = Game.new
-    # UpdateCounts.update_play_count
+    UpdateCounts.update_play_count
     content_type :json
     { current_word: settings.game.start_game }.to_json
   end
@@ -25,7 +25,7 @@ class App < Sinatra::Base
   end
 
   post '/newView.json' do
-    # UpdateCounts.update_view_count
+    UpdateCounts.update_view_count
     status 200
     body ''
   end
