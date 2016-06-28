@@ -1,6 +1,6 @@
 class UpdateCounts
   def self.update_play_count
-    file = File.open("#{ENV['HOME']}/db/counts.txt", 'r+')
+    # file = File.open("#{ENV['HOME']}/db/counts.txt", 'r+')
     # file = File.open("db/counts.txt", 'r+')
     content = file.read
     count = content.match(/Plays: (\d+)$/)[1].to_i
@@ -9,7 +9,7 @@ class UpdateCounts
   end
 
   def self.update_view_count
-    file = File.open("#{ENV['HOME']}/db/counts.txt", 'r+')
+    # file = File.open("#{ENV['HOME']}/db/counts.txt", 'r+')
     # file = File.open("db/counts.txt", 'r+')
     content = file.read
     count = content.match(/Views: (\d+)$/)[1].to_i

@@ -1,9 +1,9 @@
 var gameTimer = null;
 
 $(function() {
-  updatePageLoadCounter();
-  $('input#start-game').on('click', startGame);
-  $('input#end-game').on('click', endGame);
+  // updatePageLoadCounter();
+  $('input#start-end-game').on('click', startGame);
+  // $('input#end-game').on('click', endGame);
   $('input#make-guess').on('click', makeGuess);
   $('input#word-input').keyup(function(event){
     if(event.keyCode == 13) {
@@ -13,10 +13,11 @@ $(function() {
 })
 
 function startGame() {
-  $('input#start-game').prop('disabled', true);
+  // $('input#start-game').prop('disabled', true);
+  toggleStartEndGameButton();
   $('input#word-input').prop('disabled', false);
   $('input#make-guess').prop('disabled', false);
-  $('input#end-game').prop('disabled', false);
+  // $('input#end-game').prop('disabled', false);
   $('div#guess-result').html('<br>');
   [$('table#correct-guesses'), $('table#incorrect-guesses'), $('table#all-synonyms')].forEach(function(table) {
     table.html('<tbody><tr></tr></tbody>');
@@ -31,12 +32,13 @@ function startGame() {
 }
 
 function endGame() {
-  $('input#start-game').prop('disabled', false);
+  toggleStartEndGameButton();
+  // $('input#start-game').prop('disabled', false);
   $('input#word-input').prop('disabled', true);
   $('input#make-guess').prop('disabled', true);
-  $('input#end-game').prop('disabled', true);
+  // $('input#end-game').prop('disabled', true);
   window.clearInterval(gameTimer);
-  $('span#timer').html(0);
+  $('span#timer').html("0");
   $.ajax({
     type: 'post',
     url: '/endGame.json',
@@ -123,8 +125,8 @@ function startGameTimer() {
 }
 
 function updateGuessTable(tableName, word) {
-  var table = $('table#' + tableName);
-  var lastRow = table.children('tbody').children('tr:last');
+  let table = $('table#' + tableName);
+  let lastRow = table.children('tbody').children('tr:last');
   if (lastRow.children('td').length <= 5) {
     lastRow.append(`<td class="col-md-2 td-left">${word}</td>`);
   } else {
@@ -138,4 +140,17 @@ function updatePageLoadCounter() {
     url: '/newView.json',
     dataType: 'json'
   })
+}
+
+function toggleStartEndGameButton() {
+  let gameStatus = $('input#start-end-game').val();
+  $('input#start-end-game').off();
+  if (gameStatus === "Start Game") {
+    $('input#start-end-game').val("End Game");
+    $('input#start-end-game').on('click', endGame); 
+  } else if (gameStatus === "End Game") {
+    $('input#start-end-game').val("Start Game")
+    $('input#start-end-game').on('click', startGame); 
+
+  }
 }

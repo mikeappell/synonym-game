@@ -3,6 +3,8 @@
 <head>
   <title>The Synonym Game</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Raleway" rel="stylesheet">
+
   <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="index.js"></script>
@@ -17,29 +19,29 @@
     <div class='row text-center'>
       <div id="game-title" class="center">
         <h1>Welcome to the Synonym Game!</h1>
-        <br><br>
-        <input type='submit' id="start-game" value="Start Game">
-        <input type='submit' id="end-game" value="End Game" disabled='true'>
-        <br><br>
-        <div id="selected-word"></div>
       </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-6 right"><h3>Current Score: <span id="current-score">0</span></h3></div>
+      <div class="col-md-6 left"><h3>Total Score: <span id="total-score">0</span></h3></div>
+
+      <br><br><br>
+
+      <div><h3>Time Left: <span id="timer">0</span></h3></div>
     </div>
 
     <br>
 
-    <div class='row'>
-
-      <div class="col-md-3 pull-left left"><h3>Current Score: <span id="current-score">0</span></h3></div>
-      <div class="col-md-6 pull-left left"><h3>Total Score: <span id="total-score">0</span></h3></div>
-      <div class="col-md-2 pull-left left"><h3>Time Left: <span id="timer"></span></h3></div>
-    </div>
-
-    <br><br>
-
     <div class='row text-center'>
+
+      <input type='submit' id="start-end-game" value="Start Game">
+      <!-- <input type='submit' id="end-game" value="End Game" disabled='true'> -->
+      <br><br>
       <label for="word-input">Enter your guess</label>
       <input id="word-input" placeholder="Guesses go here" disabled="true">
       <input type='submit' id='make-guess' value="Guess!" disabled="true">
+      <div id="selected-word"></div>
     </div>
 
     <div class='row'>
