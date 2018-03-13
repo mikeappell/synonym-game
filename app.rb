@@ -12,14 +12,20 @@ class App < Sinatra::Base
   end
 
   post '/startGame.json', provides: :json do
-    settings.game = Game.new
+    settings.game ||= Game.new
     # UpdateCounts.update_play_count
+    content_type :json
+    { current_word: settings.game.start_game }.to_json
+  end
+
+  post '/startGameWithWord.json', provides: :json do
+    settings.game ||= Game.new
     content_type :json
     { current_word: settings.game.start_game }.to_json
   end
   
   post '/endGame.json', provides: :json do
-    hits_and_misses = settings.game.end_game(false)
+    hits_and_misses = settings.game.end_game(cli: false)
     content_type :json
     { hits_and_misses: hits_and_misses }.to_json
   end

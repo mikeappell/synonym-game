@@ -3,9 +3,7 @@ class CLI
   def start
     puts "Welcome to the Synonym Game!"
     @game = Game.new
-
     test_scraper
-
     user_options
   end
 
@@ -33,7 +31,7 @@ class CLI
   end
 
   def play_game
-    @lines_down = 1
+    # @lines_down = 1
     current_word = @game.start_game
     puts "Your word is '#{current_word}'."
     # puts "Your word is '#{current_word}'. Definition: #{@game.current_word_definition}."
@@ -44,7 +42,7 @@ class CLI
     @guess_thread = Thread.new {guesses_loop}
     @guess_thread.join
 
-    @game.end_game
+    @game.end_game(cli: true)
     puts "\n\nGame complete! You scored #{@game.current_score.to_s.green}. Your total score for this session is #{@game.total_score.to_s.green}.\n"
     hits_and_misses = @game.hits_and_misses
     puts "Your guesses were:\n"

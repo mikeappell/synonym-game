@@ -8,7 +8,7 @@ class Game
   attr_accessor :total_score, :current_score
   attr_reader :api_engine
 
-  def initialize
+  def initialize(word = nil)
     @scraper = ThesaurusScraper.new
     @random_word = RandomWord.new
     @total_score = 0
@@ -25,7 +25,7 @@ class Game
     "#{@current_word} - #{word_definition}"
   end
 
-  def end_game(cli = true)
+  def end_game(cli: true)
     @total_score += @current_score
     hits_and_misses(cli)
   end

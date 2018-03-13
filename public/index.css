@@ -39,3 +39,8 @@ div#guess-result {
   margin-top: 10px;
   font-family: 'Raleway', sans-serif;
 }
+
+input[type="submit"] {
+  border-radius: 3px;
+  background-color: lightgray;
+}
